@@ -1,18 +1,19 @@
+
 # RhythmIQ
 
 **RhythmIQ** generates lyrics and creates audio using advanced language models and text-to-audio services.
 
-Turn on the song stream!
+**Turn on the song stream!**
 
 ## 🚀 Getting Started
 
 ### 📋 Prerequisites
 
-- **Python**
+- **Python 3.8+**
 - **Git**
 - **nano-gpt Account:** Sign up at [nano-gpt.com](https://nano-gpt.com) for access to the pay-per-prompt service.
 
-One of
+Choose one of the following for audio synthesis:
 
 - **Suno-API Setup:** Follow the instructions at [SunoAI-API/Suno-API](https://github.com/SunoAI-API/Suno-API) to set up the Suno API.
 - **LOUDME_COOKIE:** Obtain the `LOUDME_COOKIE` environment variable by extracting it from the inspect window in your browser's network tab.
@@ -31,22 +32,31 @@ One of
    ```
 
 3. **Configure Environment Variables:**
-   - **LOUDME_COOKIE:**
-     1. Open your browser and navigate to Loudme.
-     2. Open Developer Tools (F12 or Right-click > Inspect).
-     3. Go to the **Network** tab and perform an action on Loudme to capture network requests.
-     4. Locate the request containing the `COOKIE` value.
-     5. Export the `COOKIE` value and set it as an environment variable:
-        ```bash
-        export LOUDME_COOKIE='your_cookie_value_here'
-        ```
-   - **NANOGPT_MODEL:**
-     - Choose the desired nano-gpt model by setting the `NANOGPT_MODEL` environment variable. Defaults to `o1-mini`.
-       ```bash
-       export NANOGPT_MODEL='your_preferred_model'
-       ```
 
-### 🛠️ Usage
+   Create a `.env` file in the root directory or set the environment variables in your shell.
+
+   - **Required:**
+     - **NANOGPT_API_KEY:** Your API key from nano-gpt.com
+     
+   - **Optional:**
+     - **NANOGPT_MODEL:** Choose the desired nano-gpt model. Defaults to `o1-mini`.
+     - **LOUDME_COOKIE:** Your Loudme cookie value.
+   
+   **Example `.env` file:**
+   ```
+   NANOGPT_API_KEY=your_api_key_here
+   LOUDME_COOKIE=your_cookie_value_here
+   NANOGPT_MODEL=o1-mini
+   ```
+
+   **Alternatively, set them in your shell:**
+   ```bash
+   export NANOGPT_API_KEY='your_api_key_here'
+   export LOUDME_COOKIE='your_cookie_value_here'
+   export NANOGPT_MODEL='your_preferred_model' # Optional
+   ```
+
+## 🛠️ Usage
 
 1. **Customize Prompts:**
    - Open `prompt.txt` in your preferred text editor.
@@ -74,4 +84,5 @@ Contributions are welcome! Please fork the repository and submit a pull request 
 
 ## 📄 License
 
-This project is licensed under the MIT License.
+This project is licensed under the **MIT License**.
+
