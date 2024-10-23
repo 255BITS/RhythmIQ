@@ -59,8 +59,10 @@ Choose one of the following for audio synthesis:
 ## 🛠️ Usage
 
 1. **Customize Prompts:**
-   - Open `prompt.txt` in your preferred text editor.
-   - Modify the existing prompts to tailor the lyric generation to your desired style and themes. The default is `hermes-405b` going a bit nuts.
+   - Prompting is 2-shot with examples loaded from `songs/` txt files. The ones in there are just examples, keep the format and add your own.
+   - A random instruction is chosen from `instructions/`
+   - `base.txt` is included in all prompts (at the top)
+   - `system.txt` is the system prompt
 
 2. **Run the Application:**
    ```bash

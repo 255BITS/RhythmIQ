@@ -12,6 +12,7 @@ if not LOUDME_COOKIE:
     raise EnvironmentError("LOUDME_COOKIE is not set. Please set it in the .env file.")
 
 BASE_URL = "https://loudme.ai/api/trpc/music.generateMusic?batch=1"
+NANOGPT_MODEL = os.getenv("NANOGPT_MODEL")
 
 # Load the song data from song.txt
 def load_song_data(file_path='song.txt'):
@@ -24,10 +25,10 @@ def load_song_data(file_path='song.txt'):
 # Extract relevant parts from song data
 def extract_song_parts(song_data):
     try:
-        description = song_data.split("Description:")[1].split("Name:")[0].strip()[:200]
-        title = song_data.split("Name:")[1].split("Lyrics:")[0].strip()[:80]
-        lyrics = song_data.split("Lyrics:")[1].split("Style:")[0].strip()
-        style = song_data.split("Style:")[1].split("Cost:")[0].strip()[:120]
+        description = song_data.split("Description:")[1].split("Title:")[0].strip()[:200]
+        title = song_data.split("Title:")[1].split("Lyrics:")[0].strip()[:(80-3-len(NANOGPT_MODEL))] + " - "+NANOGPT_MODEL
+        lyrics = song_data.split("Lyrics:")[1].split("Style:")[0].strip()[:3000]
+        style = song_data.split("Style:")[1].split("Negative Style:")[0].strip()[:120].replace("Negative","").strip()
         return description, title, lyrics, style
     except IndexError as e:
         raise ValueError("Song data is not in the expected format.") from e

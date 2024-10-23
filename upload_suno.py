@@ -1,29 +1,40 @@
 import requests
 import json
 import re
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
 # Read song.txt to extract relevant parts
 with open('song.txt', 'r') as file:
     song_data = file.read()
 
+NANOGPT_MODEL = os.getenv("NANOGPT_MODEL")
 # Use regex to extract different parts of the song.txt content
-description_match = re.search(r'Description:\s*(.*?)(?=\nName:)', song_data, re.DOTALL)
-title_match = re.search(r'Name:\s*(.*?)(?=\nLyrics:)', song_data, re.DOTALL)
-lyrics_match = re.search(r'Lyrics:\s*(.*?)(?=\nStyle:)', song_data, re.DOTALL)
-style_match = re.search(r'Style:\s*(.*?)(?=\nCost:)', song_data, re.DOTALL)
+description_match = re.search(r'Description:\s*(.*?)\n\n', song_data, re.DOTALL)
+title_match = re.search(r'Name:\s*(.*?)\n\n', song_data, re.DOTALL)
+lyrics_match = re.search(r'Lyrics:\s*(.*?)Style', song_data, re.DOTALL)
+style_match = re.search(r'Style:\s*(.*?)\n\n', song_data, re.DOTALL)
+negative_style_match = re.search(r'Negative Style:\s*(.*?)\n\n', song_data, re.DOTALL)
 
 # Extracted data
 description = description_match.group(1).strip() if description_match else "No description found"
 title = title_match.group(1).strip() if title_match else "No title found"
-lyrics = lyrics_match.group(1).strip() if lyrics_match else "No lyrics found"
+if not lyrics_match:
+    assert False, "No lyrics found"
+lyrics = lyrics_match.group(1).strip()
 style = style_match.group(1).strip() if style_match else "No style found"
+negative_style = negative_style_match.group(1).strip() if negative_style_match else ""
+
+if NANOGPT_MODEL:
+    title += "["+NANOGPT_MODEL+"]"
 
 # Prepare the payload using the extracted data
 payload = {
     "prompt": lyrics,  # Using the extracted lyrics for the prompt
     "generation_type": "TEXT",
     "tags": style,  # Using the extracted style as tags
-    "negative_tags": "",
+    "negative_tags": negative_style,
     "mv": "chirp-v3-5",
     "title": title,  # Using the extracted title
     "continue_clip_id": None,
