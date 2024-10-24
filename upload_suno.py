@@ -12,7 +12,7 @@ with open('song.txt', 'r') as file:
 NANOGPT_MODEL = os.getenv("NANOGPT_MODEL")
 # Use regex to extract different parts of the song.txt content
 description_match = re.search(r'Description:\s*(.*?)\n\n', song_data, re.DOTALL)
-title_match = re.search(r'Name:\s*(.*?)\n\n', song_data, re.DOTALL)
+title_match = re.search(r'Title:\s*(.*?)\n\n', song_data, re.DOTALL)
 lyrics_match = re.search(r'Lyrics:\s*(.*?)Style', song_data, re.DOTALL)
 style_match = re.search(r'Style:\s*(.*?)\n\n', song_data, re.DOTALL)
 negative_style_match = re.search(r'Negative Style:\s*(.*?)\n\n', song_data, re.DOTALL)

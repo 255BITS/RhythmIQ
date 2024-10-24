@@ -194,7 +194,6 @@ def main():
         if nano_response:
             print("NanoGPT "+NANOGPT_DEFAULT_MODEL)
             print(nano_response['text_response'])
-            print("Cost:", nano_response['nano_info'].get('nanoCost', 'N/A'))
         else:
             print("Failed to get response from NanoGPT API.")
     elif GPT_PROVIDER == "local":

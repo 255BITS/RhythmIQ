@@ -1,6 +1,7 @@
 import os
 import requests
 import json
+import re
 from dotenv import load_dotenv
 
 # Load environment variables from .env file
@@ -24,14 +25,22 @@ def load_song_data(file_path='song.txt'):
 
 # Extract relevant parts from song data
 def extract_song_parts(song_data):
-    try:
-        description = song_data.split("Description:")[1].split("Title:")[0].strip()[:200]
-        title = song_data.split("Title:")[1].split("Lyrics:")[0].strip()[:(80-3-len(NANOGPT_MODEL))] + " - "+NANOGPT_MODEL
-        lyrics = song_data.split("Lyrics:")[1].split("Style:")[0].strip()[:3000]
-        style = song_data.split("Style:")[1].split("Negative Style:")[0].strip()[:120].replace("Negative","").strip()
-        return description, title, lyrics, style
-    except IndexError as e:
-        raise ValueError("Song data is not in the expected format.") from e
+    description_match = re.search(r'Description:\s*(.*?)\n\n', song_data, re.DOTALL)
+    title_match = re.search(r'Title:\s*(.*)', song_data, re.DOTALL)
+    lyrics_match = re.search(r'Lyrics:\s*(.*?)Style', song_data, re.DOTALL)
+    style_match = re.search(r'Style:\s*(.*?)\n\n', song_data, re.DOTALL)
+    negative_style_match = re.search(r'Negative Style:\s*(.*?)\n\n', song_data, re.DOTALL)
+
+    # Extracted data
+    description = description_match.group(1).strip()[:200] if description_match else "No description found"
+    title = title_match.group(1).strip()[:(80-3-len(NANOGPT_MODEL))] + " - "+NANOGPT_MODEL if title_match else "No title found"
+    if not lyrics_match:
+        assert False, "No lyrics found"
+    lyrics = lyrics_match.group(1).strip()[:3000]
+    style = style_match.group(1).strip()[:120] if style_match else "No style found"
+    negative_style = negative_style_match.group(1).strip() if negative_style_match else ""
+
+    return description, title, lyrics, style
 
 # Create the JSON payload
 def create_payload(description, title, lyrics, style):

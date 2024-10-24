@@ -5,6 +5,7 @@ Note: This uplifting track captures the simple joys and challenges of everyday l
 Description:
 A song about a young adventurer setting off on a journey of self-discovery and facing the challenges that lie ahead. With the spirit of her ancestors guiding her, she discovers her inner strength.
 
+Lyrics:
 Verse 1:
 With a heart full of hope and eyes wide
 She sets off to embrace the tide
@@ -43,6 +44,9 @@ Trust your heart, keep on climbing
 
 Style:
 Folk-pop, clear and enchanting voice, uplifting, feel-good, and inspiring
+
+Negative Style:
+rock and roll, cheesy, boring
 
 Title:
 Embrace the Journey

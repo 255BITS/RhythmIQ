@@ -22,6 +22,7 @@ CHOICE OF SOUNDS: Have you noticed how most pop songs employ the use of the same
 Create the the next song using the same format. 
 Sections (required): 
 - Description
+- Lyrics
 - Style
 - Title
 

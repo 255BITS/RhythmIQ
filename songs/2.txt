@@ -5,9 +5,6 @@ Note: This uplifting track captures the simple joys and challenges of everyday l
 Description:
 An acoustic pop song that resonates with listeners through its relatable themes and heartfelt lyrics. It paints vivid pictures of life's small wonders and the journey toward self-discovery, wrapped in a warm and inviting melody.
 
-Title:
-Everyday Wonders
-
 Lyrics:
 Verse 1: The sun peeks through the morning haze
 Birds compose their serenades
@@ -42,7 +39,12 @@ In these times, we learn to grow
 Outro: Stars emerge as night unfolds
 In our hearts, a story told
 
-Style: Acoustic Pop with heartfelt melodies and relatable themes
+Style:
+Acoustic Pop with heartfelt melodies and relatable themes
 
+Negative Style:
+Death metal, hardcore rap
 
+Title:
+Everyday Wonders
 
