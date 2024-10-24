@@ -5,6 +5,11 @@
 
 **Turn on the song stream!**
 
+## Examples
+
+* [suno example](https://suno.com/song/eacb3f24-631e-45cb-b44e-fbee8c2d9273)
+* [loudme example](https://loudme.ai/m/cm2mqedhz03q4op02dqbg6fpw)
+
 ## 🚀 Getting Started
 
 ### 📋 Prerequisites
