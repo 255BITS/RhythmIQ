@@ -12,19 +12,19 @@ with open('song.txt', 'r') as file:
 NANOGPT_MODEL = os.getenv("NANOGPT_MODEL")
 # Use regex to extract different parts of the song.txt content
 description_match = re.search(r'Description:\s*(.*?)\n\n', song_data, re.DOTALL)
-title_match = re.search(r'Title:\s*(.*?)\n\n', song_data, re.DOTALL)
+title_match = re.search(r'Title:\s*(.*)', song_data, re.DOTALL)
 lyrics_match = re.search(r'Lyrics:\s*(.*?)Style', song_data, re.DOTALL)
 style_match = re.search(r'Style:\s*(.*?)\n\n', song_data, re.DOTALL)
 negative_style_match = re.search(r'Negative Style:\s*(.*?)\n\n', song_data, re.DOTALL)
 
 # Extracted data
 description = description_match.group(1).strip() if description_match else "No description found"
-title = title_match.group(1).strip() if title_match else "No title found"
+title = title_match.group(1).strip()[:80] if title_match else "No title found"
 if not lyrics_match:
     assert False, "No lyrics found"
-lyrics = lyrics_match.group(1).strip()
-style = style_match.group(1).strip() if style_match else "No style found"
-negative_style = negative_style_match.group(1).strip() if negative_style_match else ""
+lyrics = lyrics_match.group(1).strip()[:3000]
+style = style_match.group(1).strip()[:120] if style_match else "No style found"
+negative_style = negative_style_match.group(1).strip()[:120] if negative_style_match else ""
 
 if NANOGPT_MODEL:
     title += "["+NANOGPT_MODEL+"]"
